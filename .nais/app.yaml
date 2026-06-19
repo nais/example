@@ -3,10 +3,7 @@ kind: Application
 metadata:
   name: nais-example
 spec:
-  # The platform deletes the application this long after each deploy, so the
-  # example never lingers. Valkey is not owned by the app, so it is cleaned up
-  # separately (see .github/workflows/cleanup-valkey.yaml).
-  ttl: "1h"
+  ttl: 1h
   replicas:
     min: 1
     max: 1
