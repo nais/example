@@ -1,8 +1,0 @@
-version: v1
-kind: Valkey
-metadata:
-  name: cache
-spec:
-  tier: SingleNode
-  memory: "1GB"
-  maxMemoryPolicy: allkeys-lru

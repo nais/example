@@ -1,0 +1,8 @@
+version: v1
+kind: Config
+metadata:
+  name: debugapp-config
+  labels:
+  purpose: backend
+data:
+  VARIABLE: "dev-value"

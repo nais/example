@@ -9,12 +9,11 @@ spec:
     max: 1
   resources:
     requests:
-      cpu: 21m
+      cpu: 20m
       memory: 32Mi
   liveness:
     path: /healthz
   readiness:
     path: /healthz
-  valkey:
-    - instance: cache
-      access: readwrite
+  envFrom:
+    - configmap: example

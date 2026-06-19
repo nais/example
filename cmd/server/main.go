@@ -22,14 +22,7 @@ func main() {
 		fmt.Fprintln(w, "Hello Nais")
 		fmt.Fprintf(w, "environment: %s\n", env)
 
-		// VALKEY_HOST_CACHE is injected by Nais when the "cache" Valkey instance
-		// is referenced from the workload manifest. We only surface it here to
-		// prove the wiring; a real app would connect using a Valkey client.
-		if host := os.Getenv("VALKEY_HOST_CACHE"); host != "" {
-			fmt.Fprintf(w, "valkey: connected to %s\n", host)
-		} else {
-			fmt.Fprintln(w, "valkey: not configured")
-		}
+		fmt.Fprintf(w, "variable from config %q", os.Getenv("VARIABLE"))
 	})
 
 	port := getenv("PORT", "8080")
