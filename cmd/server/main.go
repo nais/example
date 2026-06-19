@@ -1,9 +1,3 @@
-// Command server is a minimal Nais example application.
-//
-// It prints a greeting on "/" and exposes a health endpoint on "/healthz".
-// It reports the environment (NAIS_CLUSTER_NAME, injected by Nais) and whether a
-// Valkey instance is wired in, using the environment variables Nais injects for
-// the "cache" instance (see .nais/valkey.yaml).
 package main
 
 import (
