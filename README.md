@@ -1,29 +1,16 @@
 # nais-example
 
-A minimal, opinionated example of how to structure a repository for a single
-[Nais](https://nais.io) application that owns a
-[Valkey](https://docs.nais.io/persistence/valkey/) cache. It runs in two
-environments (`dev-gcp` and `prod-gcp`).
-
-This repo is meant as a golden example: minimalistic, but showing the patterns
-we want teams to copy.
-
-## What the app does
-
-`cmd/server` is a tiny HTTP server that prints a greeting on `/` and serves a
-health check on `/healthz`. The Valkey connection details are injected by Nais.
-That's it — the point is the **structure**, not the app.
+A minimal, opinionated example of how to structure a repository for a single [Nais](https://nais.io) application that owns a [Valkey](https://docs.nais.io/persistence/valkey/) cache. It runs in two environments (`dev-gcp` and `prod-gcp`).
 
 ## Layout
 
 ```
 .nais/
   app.yaml             # Application (base = dev-gcp) — deployed by deploy-app
-  app.prod-gcp.yaml    # per-env mixin (auto-resolved)
+  app.prod-gcp.yaml    # production mixin (auto-resolved)
   valkey.yaml          # Valkey (base = dev-gcp) — deployed by deploy-nais-resources
-  valkey.prod-gcp.yaml # per-env mixin
+  valkey.prod-gcp.yaml # production mixin
 cmd/server/main.go     # the application
-Dockerfile
 ```
 
 All Nais manifests live under `.nais/`.
@@ -57,39 +44,5 @@ resource changes are deployed independently:
 | [`deploy-nais-resources`](.github/workflows/deploy-nais-resources.yaml) | any change under `.nais/**` | `nais apply` for Valkey and the app manifest to each env |
 | [`cleanup-valkey`](.github/workflows/cleanup-valkey.yaml) | nightly schedule | `nais valkey delete` for each env |
 
-Why split them?
-
-- A source change builds a new image and rolls it out; a manifest change (app
-  or Valkey) is applied without touching the image.
-- The app manifest carries **no image**. `deploy-app` injects the freshly built
-  tag with `--set spec.image`; `deploy-nais-resources` applies it without an
-  image, so the CLI keeps whichever image is currently running (it queries the
-  Nais API). The manifest stays free of image churn either way.
-- First deploy of a brand-new app must come from `deploy-app`, since there is no
-  running image for the CLI to reuse yet.
-- Edge case: a commit touching both source and `.nais/app.yaml` triggers both
-  workflows; the build run normally lands last (it's slower) and wins. Avoid
-  mixing code and app-manifest changes in one commit.
-
-Both workflows authenticate to Nais purely via GitHub's OIDC token
-(`permissions: id-token: write`) and use [`nais/setup`](https://github.com/nais/setup)
-to install the CLI — no long-lived secrets for deploying.
-
-## Lifecycle / cleanup
-
-This example is disposable — it cleans up after itself so it never lingers:
-
-- The **application** sets `spec.ttl: "1h"`; the platform deletes it that long
-  after each deploy. Bump or remove the field if you want it to stay up.
-- The **Valkey** instance is a separate resource the app does not own, so the
-  TTL does not reach it. The [`cleanup-valkey`](.github/workflows/cleanup-valkey.yaml)
-  workflow deletes it on a nightly schedule (`nais valkey delete cache -y`).
-  A Valkey can only be deleted once no workload references it, which the app's
-  TTL ensures by then.
-
-## Local development
-
-```bash
-go run ./cmd/server
-# open http://localhost:8080
-```
+A source change builds a new image and rolls it out; a manifest change (app or Valkey) is applied without touching the image.
+The app manifest carries **no image**. `deploy-app` injects the freshly built tag with `--set spec.image`; `deploy-nais-resources` applies it without an image, so the CLI keeps whichever image is currently running (it queries the Nais API).
