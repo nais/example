@@ -14,7 +14,7 @@ jobs:
       contents: read
       id-token: write
     steps:
-      - uses: nais/setup@v1
+      - uses: nais/setup@v1.0.0-next.5 # ratchet:exclude
       - name: Delete Valkey in dev-gcp
         run: nais valkey delete cache --team nais --environment dev-gcp --yes
       - name: Delete Valkey in prod-gcp
