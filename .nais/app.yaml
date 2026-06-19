@@ -18,6 +18,6 @@ spec:
     path: /healthz
   readiness:
     path: /healthz
-  valkey:
-    - instance: cache
-      access: readwrite
+  #valkey:
+    #- instance: cache
+      #access: readwrite
