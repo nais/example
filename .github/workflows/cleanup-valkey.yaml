@@ -1,0 +1,21 @@
+name: Clean up Valkey
+# The application deletes itself via spec.ttl, but its Valkey instance is a
+# separate resource the platform does not own. This scheduled job removes it so
+# the example leaves nothing behind.
+on:
+  schedule:
+    - cron: "0 22 * * *" # every night at 22:00 UTC
+  workflow_dispatch: {}
+
+jobs:
+  delete:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: nais/setup@v1
+      - name: Delete Valkey in dev-gcp
+        run: nais valkey delete cache --team nais --environment dev-gcp --yes
+      - name: Delete Valkey in prod-gcp
+        run: nais valkey delete cache --team nais --environment prod-gcp --yes

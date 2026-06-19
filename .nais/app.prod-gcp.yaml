@@ -1,0 +1,8 @@
+spec:
+  replicas:
+    min: 2
+    max: 4
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi

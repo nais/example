@@ -1,0 +1,3 @@
+spec:
+  tier: HighAvailability
+  memory: "4GB"
