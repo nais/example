@@ -25,7 +25,7 @@ func main() {
 
 		env := getenv("NAIS_CLUSTER_NAME", "local")
 
-		fmt.Fprintln(w, "Hello Nais 👋")
+		fmt.Fprintln(w, "Hello Nais")
 		fmt.Fprintf(w, "environment: %s\n", env)
 
 		// VALKEY_HOST_CACHE is injected by Nais when the "cache" Valkey instance
