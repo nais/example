@@ -9,7 +9,7 @@ spec:
     max: 1
   resources:
     requests:
-      cpu: 20m
+      cpu: 21m
       memory: 32Mi
   liveness:
     path: /healthz
