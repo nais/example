@@ -21,7 +21,6 @@ func main() {
 
 		fmt.Fprintln(w, "Hello Nais")
 		fmt.Fprintf(w, "environment: %s\n", env)
-
 		fmt.Fprintf(w, "variable from config %q", os.Getenv("VARIABLE"))
 	})
 
