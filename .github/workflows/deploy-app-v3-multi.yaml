@@ -7,7 +7,7 @@ on:
       - "go.mod"
       - "go.sum"
       - "Dockerfile"
-      - ".nais/app-v2-with-config.yaml"
+      - ".nais/app-v3-with-config.yaml"
       - ".github/workflows/deploy-app-v3-multi.yaml"
 
 jobs:
@@ -42,5 +42,5 @@ jobs:
         uses: nais/deploy/actions/deploy@deploy-v3
         env:
           CLUSTER: dev-gcp
-          RESOURCE: .nais/app-v2-with-config.yaml
+          RESOURCE: .nais/app-v3-with-config.yaml
           IMAGE: ${{ needs.build.outputs.image }}
