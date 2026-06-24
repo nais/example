@@ -39,7 +39,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Deploy to dev-gcp
-        uses: nais/deploy/actions/deploy-v3@deploy-v3
+        uses: nais/deploy/actions/deploy@deploy-v3
         env:
           CLUSTER: dev-gcp
           RESOURCE: .nais/app-v2-with-config.yaml
