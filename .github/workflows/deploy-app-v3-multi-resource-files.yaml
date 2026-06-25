@@ -43,5 +43,5 @@ jobs:
         uses: nais/deploy/actions/deploy@deploy-v3
         env:
           CLUSTER: dev-gcp
-          RESOURCE: .nais/app-v3-multi-res.yaml,.nais/config-v3-multi-res.yaml
+          RESOURCE: .nais/config-v3-multi-res.yaml,.nais/app-v3-multi-res.yaml
           IMAGE: ${{ needs.build.outputs.image }}
