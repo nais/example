@@ -3,4 +3,4 @@ kind: Config
 metadata:
   name: example
 data:
-  VARIABLE: "dev-value"
+  VARIABLE: "base-value"
