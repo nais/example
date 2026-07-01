@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v6
       - name: Build and push to GAR
         id: docker-build-push
-        uses: nais/docker-build-push@v0
+        uses: nais/docker-build-push@b435f911d6a49d341267f4cbfcc75ad8b0dc6f04
         with:
           team: nais
           identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
