@@ -41,6 +41,6 @@ jobs:
         with:
           team: nais
       - name: Deploy to dev-gcp
-        run: nais alpha apply .nais/app.yaml --environment dev-gcp --set spec.image="${{ needs.build.outputs.image }}" --wait
+        run: nais apply .nais/app.yaml --environment dev-gcp --set spec.image="${{ needs.build.outputs.image }}" --wait
       - name: Deploy to prod-gcp
-        run: nais alpha apply .nais/app.yaml --environment prod-gcp --set spec.image="${{ needs.build.outputs.image }}" --wait
+        run: nais apply .nais/app.yaml --environment prod-gcp --set spec.image="${{ needs.build.outputs.image }}" --wait
