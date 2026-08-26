@@ -19,9 +19,9 @@ jobs:
           team: nais
       - name: Apply to dev-gcp
         run: |
-          nais alpha apply .nais/config.yaml --environment dev-gcp
-          nais alpha apply .nais/app.yaml --environment dev-gcp --wait
+          nais apply .nais/config.yaml --environment dev-gcp
+          nais apply .nais/app.yaml --environment dev-gcp --wait
       - name: Apply to prod-gcp
         run: |
-          nais alpha apply .nais/config.yaml --environment prod-gcp
-          nais alpha apply .nais/app.yaml --environment prod-gcp --wait
+          nais apply .nais/config.yaml --environment prod-gcp
+          nais apply .nais/app.yaml --environment prod-gcp --wait
