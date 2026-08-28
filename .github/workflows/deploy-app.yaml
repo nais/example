@@ -2,35 +2,10 @@ name: Deploy app
 on:
   push:
     branches: [deploy-action]
-    # paths:
-    #   - "cmd/**"
-    #   - "go.mod"
-    #   - "go.sum"
-    #   - "Dockerfile"
-    #   - ".github/workflows/deploy-app.yaml"
 
 jobs:
-  build:
-    name: Build and push image
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
-    outputs:
-      image: ${{ steps.docker-build-push.outputs.image }}
-    steps:
-      - uses: actions/checkout@v6
-      - name: Build and push to GAR
-        id: docker-build-push
-        uses: nais/docker-build-push@b435f911d6a49d341267f4cbfcc75ad8b0dc6f04
-        with:
-          team: nais
-          identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
-          project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
-
   deploy:
     name: Deploy
-    needs: build
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -41,11 +16,11 @@ jobs:
         env:
           TEAM: nais
           CLUSTER: dev-gcp
-          WORKLOAD_IMAGE: ${{ needs.build.outputs.image }}
+          WORKLOAD_IMAGE: "europe-north1-docker.pkg.dev/nais-management-233d/nais/example:2026.08.28-12.53-21e0303@sha256:12c4f08e8a5a9da215d1d47c8449c717b2ad65df5270cb10e994326663f52c16"
           RESOURCE: ./.nais/app.yaml
       - uses: nais/deploy/actions/deploy@v3-alpha
         env:
           TEAM: nais
           CLUSTER: prod-gcp
-          WORKLOAD_IMAGE: ${{ needs.build.outputs.image }}
+          WORKLOAD_IMAGE: "europe-north1-docker.pkg.dev/nais-management-233d/nais/example:2026.08.28-12.53-21e0303@sha256:12c4f08e8a5a9da215d1d47c8449c717b2ad65df5270cb10e994326663f52c16"
           RESOURCE: ./.nais/app.yaml
