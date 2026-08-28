@@ -2,12 +2,12 @@ name: Deploy app
 on:
   push:
     branches: [deploy-action]
-    paths:
-      - "cmd/**"
-      - "go.mod"
-      - "go.sum"
-      - "Dockerfile"
-      - ".github/workflows/deploy-app.yaml"
+    # paths:
+    #   - "cmd/**"
+    #   - "go.mod"
+    #   - "go.sum"
+    #   - "Dockerfile"
+    #   - ".github/workflows/deploy-app.yaml"
 
 jobs:
   build:
