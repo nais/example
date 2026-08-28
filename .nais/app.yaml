@@ -2,6 +2,7 @@ apiVersion: nais.io/v1alpha1
 kind: Application
 metadata:
   name: example
+  namespace: nais
 spec:
   replicas:
     min: 1
