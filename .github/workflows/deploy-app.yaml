@@ -42,10 +42,10 @@ jobs:
           TEAM: nais
           CLUSTER: dev-gcp
           WORKLOAD_IMAGE: ${{ needs.build.outputs.image }}
-          RESOURCE: ./nais/app.yaml
+          RESOURCE: ./.nais/app.yaml
       - uses: nais/deploy/actions/deploy@v2 # ratchet:exclude
         env:
           TEAM: nais
           CLUSTER: prod-gcp
           WORKLOAD_IMAGE: ${{ needs.build.outputs.image }}
-          RESOURCE: ./nais/app.yaml
+          RESOURCE: ./.nais/app.yaml
