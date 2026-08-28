@@ -37,13 +37,13 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@v6
-      - uses: nais/deploy/actions/deploy@v2 # ratchet:exclude
+      - uses: nais/deploy/actions/deploy@v3-alpha
         env:
           TEAM: nais
           CLUSTER: dev-gcp
           WORKLOAD_IMAGE: ${{ needs.build.outputs.image }}
           RESOURCE: ./.nais/app.yaml
-      - uses: nais/deploy/actions/deploy@v2 # ratchet:exclude
+      - uses: nais/deploy/actions/deploy@v3-alpha
         env:
           TEAM: nais
           CLUSTER: prod-gcp
