@@ -1,6 +1,0 @@
-version: v1
-kind: Config
-metadata:
-  name: example
-data:
-  VARIABLE: "base-value"
