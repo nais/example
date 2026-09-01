@@ -1,0 +1,16 @@
+apiVersion: nais.io/v1
+kind: OpenSearch
+metadata:
+  name: thomas-test
+  namespace: nais
+spec:
+  http:
+    maxContentLength: 100Mi
+  indices:
+    queryBoolMaxClauseCount: 1024
+  memory: 4GB
+  shardIndexingPressure:
+    enabled: true
+  storageGB: 80
+  tier: SingleNode
+  version: "3.3"

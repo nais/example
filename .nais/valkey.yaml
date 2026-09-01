@@ -1,0 +1,13 @@
+apiVersion: nais.io/v1
+kind: Valkey
+metadata:
+  name: thomas-test
+  namespace: nais
+spec:
+  databases: 16
+  maxMemoryPolicy: noeviction
+  memory: 1GB
+  notifyKeyspaceEvents: KEA
+  persistence:
+    disabled: true
+  tier: SingleNode

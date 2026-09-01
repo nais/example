@@ -17,7 +17,7 @@ jobs:
           TEAM: nais
           CLUSTER: dev-gcp
           WORKLOAD_IMAGE: "europe-north1-docker.pkg.dev/nais-management-233d/nais/example:2026.08.28-12.53-21e0303@sha256:12c4f08e8a5a9da215d1d47c8449c717b2ad65df5270cb10e994326663f52c16"
-          RESOURCE: ./.nais/app.yaml
+          RESOURCE: ./.nais/app.yaml,./.nais/valkey.yaml,./.nais/opensearch.yaml
       - uses: nais/deploy/actions/deploy@v3-alpha
         env:
           TEAM: nais
